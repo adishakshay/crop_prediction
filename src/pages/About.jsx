@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./../styles/About.css";
 import {
   FaSeedling,
@@ -12,7 +13,9 @@ import {
   FaUsers,
 } from "react-icons/fa";
 
+
 const About = () => {
+  const navigate = useNavigate();
   return (
     <div className="about-container">
       <h1 className="about-title">🌱 About NetPlough</h1>
@@ -172,7 +175,9 @@ const About = () => {
           sustainable practice. Whether you are a farmer, researcher, or
           partner—together, we can shape the future of agriculture.
         </p>
-        <button className="about-cta-btn">Get Started with NetPlough</button>
+        <button className="about-cta-btn" onClick={() => navigate("/recommendations")}>
+          Get Started with NetPlough
+        </button>
       </section>
     </div>
   );

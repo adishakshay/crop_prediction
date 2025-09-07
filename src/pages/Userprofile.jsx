@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { LanguageContext } from "../contexts/LanguageContext"; 
 import { languages } from "../utils/languages";
 import "./../styles/Userprofile.css";
 
 function Userprofile() {
   const [user, setUser] = useState(null);
-  const [lang, setLang] = useState("en");
+  const { lang, setLang } = useContext(LanguageContext); // ✅ Global state
   const [stage, setStage] = useState("view"); // view / verifyCurrent / otp / updateNew
   const [currentPhone, setCurrentPhone] = useState("");
   const [newPhone, setNewPhone] = useState("");
@@ -90,7 +91,7 @@ function Userprofile() {
           className="userprofile-avatar"
         />
         <h2>{user.name || "Farmer"}</h2>
-        <p>{t.emailLabel}: {user.email}</p>
+        {/* <p>{t.currentPhoneLabel}: {user.currentPhone}</p> */}
         <p>{t.roleLabel}: {user.role || "Farmer"}</p>
 
         {/* Language Selector */}

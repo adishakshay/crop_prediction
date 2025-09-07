@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { LanguageContext } from "../contexts/LanguageContext";
+import { languages } from "../utils/languages";
 import "./../styles/Recommendations.css";
 
 /**
  * Recommendations.jsx
- * - 3 Location modes: GPS, Manual Lat/Lon, Address
- * - Address -> Lat/Lon using OpenStreetMap (Nominatim API)
- * - "Open in Google Maps" works for both coordinates & address
- * - Jharkhand-specific soil/crop categories
+ * - Multi-language integrated (English, Hindi, Sanskrit)
+ * - Labels, buttons, placeholders auto-change with profile language
  */
 
 const Recommendations = () => {
+  const { lang } = useContext(LanguageContext);
+  const t = languages[lang]; // ✅ translation object
+
   const [formData, setFormData] = useState({
     latitude: "",
     longitude: "",
@@ -51,20 +54,18 @@ const Recommendations = () => {
     }
   };
 
-  // Handle address field changes
   const handleAddressChange = (e) => {
     const { name, value } = e.target;
     setAddressData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // GPS Location detection
+  // GPS Location detection (unchanged)
   const handleLocationDetect = async () => {
     if (!("geolocation" in navigator)) {
-      alert("Geolocation is not supported by this browser.");
+      alert(t.geoNotSupported);
       return;
     }
-
-    setLocationStatus("Requesting location permission...");
+    setLocationStatus(t.requestingLocation);
     setLocationAccuracy(null);
 
     try {
@@ -74,9 +75,7 @@ const Recommendations = () => {
       });
 
       if (!bestPosition) {
-        setLocationStatus(
-          "Unable to get a precise location. Try again outdoors with GPS on."
-        );
+        setLocationStatus(t.noPreciseLocation);
         return;
       }
 
@@ -86,12 +85,9 @@ const Recommendations = () => {
 
       setFormData((prev) => ({ ...prev, latitude: lat, longitude: lon }));
       setLocationAccuracy(acc);
-      setLocationStatus(`Location detected — accuracy ~ ${acc} m`);
+      setLocationStatus(`${t.locationDetected} ~ ${acc} m`);
     } catch (err) {
-      console.error("Location error:", err);
-      setLocationStatus(
-        "Failed to detect location. Please allow permission or try again outdoors."
-      );
+      setLocationStatus(t.locationFailed);
     }
   };
 
@@ -130,14 +126,6 @@ const Recommendations = () => {
         reject(err);
       }
 
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          if (!best || pos.coords.accuracy < best.coords.accuracy) best = pos;
-        },
-        () => {},
-        { enableHighAccuracy: true, maximumAge: 0, timeout: Math.min(3000, timeout) }
-      );
-
       setTimeout(() => {
         if (!settled) {
           settled = true;
@@ -149,32 +137,29 @@ const Recommendations = () => {
     });
   };
 
-  // Open Google Maps with lat/lon or address
+  // Open Google Maps
   const openInGoogleMaps = () => {
     const { latitude, longitude } = formData;
-
     if (latitude && longitude) {
-      // ✅ If lat/lon available, open coordinates
       const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
       window.open(url, "_blank");
     } else if (addressData.state || addressData.district || addressData.pincode) {
-      // ✅ If address available, open address search
       const query = `${addressData.district}, ${addressData.state}, ${addressData.pincode}, India`;
       const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
         query
       )}`;
       window.open(url, "_blank");
     } else {
-      alert("No location data available. Enter coordinates or address first.");
+      alert(t.noLocationAvailable);
     }
   };
 
-  // Convert address -> lat/lon
+  // Address -> coordinates
   const fetchCoordinatesFromAddress = async () => {
     const { state, district, pincode } = addressData;
     const query = `${district}, ${state}, ${pincode}, India`;
 
-    setLocationStatus("Fetching coordinates for address...");
+    setLocationStatus(t.fetchingCoordinates);
 
     try {
       const res = await fetch(
@@ -186,22 +171,20 @@ const Recommendations = () => {
       if (data.length > 0) {
         const { lat, lon } = data[0];
         setFormData((prev) => ({ ...prev, latitude: lat, longitude: lon }));
-        setLocationStatus("📍 Location detected from address");
+        setLocationStatus(t.locationFromAddress);
       } else {
-        setLocationStatus("❌ Could not find location. Check spelling/pincode.");
+        setLocationStatus(t.locationNotFound);
       }
     } catch (err) {
-      console.error(err);
-      setLocationStatus("⚠️ Error fetching coordinates. Try again.");
+      setLocationStatus(t.errorFetchingCoordinates);
     }
   };
 
-  // Submit form to ML backend
+  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (formData.landAcres < 0) {
-      alert("Land acres must be greater than or equal to 0.");
+      alert(t.landAcresValidation);
       return;
     }
 
@@ -214,9 +197,8 @@ const Recommendations = () => {
       });
       const data = await res.json();
       setResult(data);
-    } catch (err) {
-      console.error(err);
-      alert("Error calling recommendation API. Check console.");
+    } catch {
+      alert(t.apiError);
     } finally {
       setLoading(false);
     }
@@ -224,19 +206,19 @@ const Recommendations = () => {
 
   return (
     <div className="recommendation-container">
-      <h2 className="recommendation-title">🌱 Crop Recommendation (Jharkhand)</h2>
+      <h2 className="recommendation-title">{t.recommendationTitle}</h2>
 
       <form className="recommendation-form" onSubmit={handleSubmit}>
         {/* Location Mode Selector */}
         <div className="recommendation-form-group" style={{ gridColumn: "span 2" }}>
-          <label>Location Input Mode</label>
+          <label>{t.locationMode}</label>
           <select
             value={locationMode}
             onChange={(e) => setLocationMode(e.target.value)}
           >
-            <option value="gps">📡 Use GPS</option>
-            <option value="manual">✏️ Enter Latitude & Longitude</option>
-            <option value="address">🏠 Enter Address (State, District, Pincode)</option>
+            <option value="gps">📡 {t.useGps}</option>
+            <option value="manual">✏️ {t.enterLatLon}</option>
+            <option value="address">🏠 {t.enterAddress}</option>
           </select>
         </div>
 
@@ -248,7 +230,7 @@ const Recommendations = () => {
               className="recommendation-location-btn"
               onClick={handleLocationDetect}
             >
-              📍 Detect My Location
+              📍 {t.detectLocation}
             </button>
             <button
               type="button"
@@ -256,12 +238,12 @@ const Recommendations = () => {
               onClick={openInGoogleMaps}
               style={{ marginTop: 8 }}
             >
-              🗺️ Open in Google Maps
+              🗺️ {t.openInMaps}
             </button>
             <div className="recommendation-location-info">{locationStatus}</div>
             {locationAccuracy && (
               <div className="recommendation-location-accuracy">
-                Accuracy: ~{locationAccuracy} m
+                {t.accuracy} ~{locationAccuracy} m
               </div>
             )}
           </div>
@@ -271,7 +253,7 @@ const Recommendations = () => {
         {locationMode === "manual" && (
           <>
             <div className="recommendation-form-group">
-              <label>Latitude</label>
+              <label>{t.latitude}</label>
               <input
                 type="number"
                 name="latitude"
@@ -282,7 +264,7 @@ const Recommendations = () => {
               />
             </div>
             <div className="recommendation-form-group">
-              <label>Longitude</label>
+              <label>{t.longitude}</label>
               <input
                 type="number"
                 name="longitude"
@@ -298,7 +280,7 @@ const Recommendations = () => {
                 className="recommendation-openmaps-btn"
                 onClick={openInGoogleMaps}
               >
-                🗺️ Open in Google Maps
+                🗺️ {t.openInMaps}
               </button>
             </div>
           </>
@@ -306,11 +288,8 @@ const Recommendations = () => {
 
         {/* Address Mode */}
         {locationMode === "address" && (
-          <div
-            className="recommendation-form-group"
-            style={{ gridColumn: "span 2" }}
-          >
-            <label>State</label>
+          <div className="recommendation-form-group" style={{ gridColumn: "span 2" }}>
+            <label>{t.state}</label>
             <input
               type="text"
               name="state"
@@ -318,7 +297,7 @@ const Recommendations = () => {
               onChange={handleAddressChange}
               required
             />
-            <label>District</label>
+            <label>{t.district}</label>
             <input
               type="text"
               name="district"
@@ -326,7 +305,7 @@ const Recommendations = () => {
               onChange={handleAddressChange}
               required
             />
-            <label>Pincode</label>
+            <label>{t.pincode}</label>
             <input
               type="text"
               name="pincode"
@@ -340,7 +319,7 @@ const Recommendations = () => {
               style={{ marginTop: 10 }}
               onClick={fetchCoordinatesFromAddress}
             >
-              🔍 Get Coordinates from Address
+              🔍 {t.getCoordinates}
             </button>
             <button
               type="button"
@@ -348,7 +327,7 @@ const Recommendations = () => {
               style={{ marginTop: 10 }}
               onClick={openInGoogleMaps}
             >
-              🗺️ Open in Google Maps
+              🗺️ {t.openInMaps}
             </button>
             <div className="recommendation-location-info">{locationStatus}</div>
           </div>
@@ -356,40 +335,40 @@ const Recommendations = () => {
 
         {/* Area Type */}
         <div className="recommendation-form-group">
-          <label>Area Type</label>
+          <label>{t.areaType}</label>
           <select
             name="areaType"
             value={formData.areaType}
             onChange={handleChange}
           >
-            <option value="Plain">Plain</option>
-            <option value="Mountain">Mountain</option>
-            <option value="Plateau">Plateau</option>
+            <option value="Plain">{t.plain}</option>
+            <option value="Mountain">{t.mountain}</option>
+            <option value="Plateau">{t.plateau}</option>
           </select>
         </div>
 
         {/* Soil Type */}
         <div className="recommendation-form-group">
-          <label>Soil Type (Jharkhand)</label>
+          <label>{t.soilType}</label>
           <select
             name="soilType"
             value={formData.soilType}
             onChange={handleChange}
             required
           >
-            <option value="">Select Soil</option>
-            <option value="Red">Red Soil</option>
-            <option value="Laterite">Laterite Soil</option>
-            <option value="Sandy">Sandy Soil</option>
-            <option value="Loamy">Loamy Soil</option>
-            <option value="Clay">Clay Soil</option>
-            <option value="Alluvial">Alluvial Soil</option>
+            <option value="">{t.selectSoil}</option>
+            <option value="Red">{t.redSoil}</option>
+            <option value="Laterite">{t.lateriteSoil}</option>
+            <option value="Sandy">{t.sandySoil}</option>
+            <option value="Loamy">{t.loamySoil}</option>
+            <option value="Clay">{t.claySoil}</option>
+            <option value="Alluvial">{t.alluvialSoil}</option>
           </select>
         </div>
 
         {/* Water Sources */}
         <div className="recommendation-form-group">
-          <label>Water Sources</label>
+          <label>{t.waterSources}</label>
           <div className="recommendation-checkbox-group">
             {["Rainfed", "Canal", "Borewell", "River", "Pond"].map((src) => (
               <label key={src}>
@@ -399,7 +378,7 @@ const Recommendations = () => {
                   checked={formData.waterSources.includes(src)}
                   onChange={handleChange}
                 />
-                {src}
+                {t[src.toLowerCase()]}
               </label>
             ))}
           </div>
@@ -407,15 +386,15 @@ const Recommendations = () => {
 
         {/* Previous Crop */}
         <div className="recommendation-form-group">
-          <label>Previous Crop Harvested</label>
+          <label>{t.previousCrop}</label>
           <input
             type="text"
             name="previousCrop"
-            placeholder="E.g. Rice, Maize"
+            placeholder={t.previousCropPlaceholder}
             value={formData.previousCrop}
             onChange={handleChange}
           />
-          <label>Harvested Date</label>
+          <label>{t.harvestedDate}</label>
           <input
             type="date"
             name="harvestedDate"
@@ -426,7 +405,7 @@ const Recommendations = () => {
 
         {/* Expected Seeding */}
         <div className="recommendation-form-group">
-          <label>Expected Seeding Month</label>
+          <label>{t.expectedSeeding}</label>
           <input
             type="month"
             name="expectedSeedingMonth"
@@ -438,7 +417,7 @@ const Recommendations = () => {
 
         {/* Land Acres */}
         <div className="recommendation-form-group">
-          <label>Land Acres</label>
+          <label>{t.landAcres}</label>
           <input
             type="number"
             name="landAcres"
@@ -451,34 +430,34 @@ const Recommendations = () => {
 
         {/* Cropping Type */}
         <div className="recommendation-form-group">
-          <label>Cropping Type</label>
+          <label>{t.croppingType}</label>
           <select
             name="croppingType"
             value={formData.croppingType}
             onChange={handleChange}
           >
-            <option value="Short-term">Short-term</option>
-            <option value="Long-term">Long-term</option>
-            <option value="Mixed">Mixed</option>
+            <option value="Short-term">{t.shortTerm}</option>
+            <option value="Long-term">{t.longTerm}</option>
+            <option value="Mixed">{t.mixed}</option>
           </select>
         </div>
 
         {/* Crop Category */}
         <div className="recommendation-form-group">
-          <label>Crop Category</label>
+          <label>{t.cropCategory}</label>
           <select
             name="cropCategory"
             value={formData.cropCategory}
             onChange={handleChange}
             required
           >
-            <option value="">Select Category</option>
-            <option value="Vegetables">Vegetables</option>
-            <option value="Fruits">Fruits</option>
-            <option value="Pulses">Pulses</option>
-            <option value="Cereals">Cereals</option>
-            <option value="Oilseeds">Oilseeds</option>
-            <option value="Cash Crops">Cash Crops</option>
+            <option value="">{t.selectCategory}</option>
+            <option value="Vegetables">{t.vegetables}</option>
+            <option value="Fruits">{t.fruits}</option>
+            <option value="Pulses">{t.pulses}</option>
+            <option value="Cereals">{t.cereals}</option>
+            <option value="Oilseeds">{t.oilseeds}</option>
+            <option value="Cash Crops">{t.cashCrops}</option>
           </select>
         </div>
 
@@ -488,7 +467,7 @@ const Recommendations = () => {
           className="recommendation-submit-btn"
           disabled={loading}
         >
-          {loading ? "Processing..." : "Get Recommendation"}
+          {loading ? t.processing : t.getRecommendation}
         </button>
       </form>
 
@@ -496,12 +475,14 @@ const Recommendations = () => {
       {result && (
         <div className="recommendation-result">
           <h3 className="recommendation-result-title">
-            🌾 Recommended Crop: {result.recommendedCrop}
+            🌾 {t.recommendedCrop}: {result.recommendedCrop}
           </h3>
-          <p>Duration: {result.cropDurationDays} days</p>
+          <p>
+            {t.duration}: {result.cropDurationDays} {t.days}
+          </p>
 
           <div className="recommendation-growth-stages">
-            <h4>Growth Stages:</h4>
+            <h4>{t.growthStages}</h4>
             <ul>
               {result.growthStages.map((stage, idx) => (
                 <li key={idx}>{stage}</li>
@@ -510,10 +491,10 @@ const Recommendations = () => {
           </div>
 
           <div className="recommendation-investment-card">
-            <h4>💰 Investment & Profit</h4>
-            <p>Investment: ₹{result.investment}</p>
-            <p>Profit: ₹{result.profit}</p>
-            <p>ROI: {result.roi}</p>
+            <h4>💰 {t.investmentProfit}</h4>
+            <p>{t.investment}: ₹{result.investment}</p>
+            <p>{t.profit}: ₹{result.profit}</p>
+            <p>{t.roi}: {result.roi}</p>
           </div>
         </div>
       )}

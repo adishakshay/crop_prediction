@@ -1,10 +1,16 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom"; // ✅ Import Link
 import { motion } from "framer-motion";
+import { LanguageContext } from "../contexts/LanguageContext";
+import { languages } from "../utils/languages";
 import "./../styles/Home.css";
 
 import HeroImage from "./../assets/Gemini_Generated_Image_kuyxrkuyxrkuyxrk.png";
 
-
 function Home() {
+  const { lang } = useContext(LanguageContext);
+  const t = languages[lang]; // translations
+
   return (
     <>
       {/* Hero Section */}
@@ -21,7 +27,7 @@ function Home() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            🌾 Welcome to NetPlough
+            {t.homeTitle}
           </motion.h1>
 
           <motion.p
@@ -30,19 +36,14 @@ function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
           >
-            Smart farming made simple — AI-powered crop recommendations,
-            investment insights, and a trusted farmer marketplace, all in one
-            place.
+            {t.homeSubtitle}
           </motion.p>
 
-          <motion.a
-            href="/cropform"
-            className="home-cta-btn"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Get Started
-          </motion.a>
+          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+            <Link to="/recommendations" className="home-cta-btn">
+              {t.submitBtn || "Get Started"}
+            </Link>
+          </motion.div>
         </motion.div>
 
         <motion.div
@@ -70,25 +71,25 @@ function Home() {
           viewport={{ once: true }}
           transition={{ duration: 1 }}
         >
-          🌟 Why Choose NetPlough?
+          🌟 {t.featureSectionTitle || "Why Choose NetPlough?"}
         </motion.h2>
 
         <div className="home-feature-cards">
           {[
             {
               img: "https://cdn-icons-png.flaticon.com/512/2903/2903560.png",
-              title: "AI Crop Recommendations",
-              desc: "Get the best crop suggestions based on soil, climate, and region.",
+              title: t.feature1Title,
+              desc: t.feature1Desc,
             },
             {
               img: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-              title: "Farmer Marketplace",
-              desc: "Connect with trusted buyers & sellers in your region.",
+              title: t.feature2Title,
+              desc: t.feature2Desc,
             },
             {
               img: "https://cdn-icons-png.flaticon.com/512/1041/1041883.png",
-              title: "Weather Insights",
-              desc: "Stay updated with real-time weather forecasts for smart farming.",
+              title: t.feature3Title,
+              desc: t.feature3Desc,
             },
           ].map((feature, i) => (
             <motion.div
@@ -117,7 +118,7 @@ function Home() {
           viewport={{ once: true }}
           transition={{ duration: 1 }}
         >
-          🎥 See How It Works
+          {t.videoSection}
         </motion.h2>
 
         <motion.div
@@ -130,7 +131,7 @@ function Home() {
           <iframe
             width="560"
             height="315"
-            src="https://www.youtube.com/embed/ayW4GZ9wGmc"
+            src="https://www.youtube.com/embed/2xrh6EciCZk"
             title="Farming AI Demo"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -21,7 +21,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/userprofile" element={<Userprofile />} />
-        <Route path="/form" element={<CropForm />} />
+        <Route path="/cropform" element={<CropForm />} />
         <Route path="/recommendations" element={<Recommendations />} />
         <Route path="/history" element={<History />} />
         <Route path="/about" element={<About />} />

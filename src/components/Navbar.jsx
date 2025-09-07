@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
-import logo from "./../assets/NetPlough_logo.png"; // ✅ Import logo
+import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa"; // ✅ Added Profile icon
+import logo from "./../assets/NetPlough_logo.png"; 
 import "./../styles/Navbar.css";
 
 function Navbar() {
@@ -68,9 +68,14 @@ function Navbar() {
                 <Link to="/signup" className="navbar-signup-btn" onClick={() => setMenuOpen(false)}>Signup</Link>
               </>
             ) : (
-              <button onClick={() => setShowLogoutModal(true)} className="navbar-logout-btn">
-                Logout
-              </button>
+              <>
+                <Link to="/userprofile" className="navbar-profile-btn" onClick={() => setMenuOpen(false)}>
+                  <FaUserCircle size={24} /> Profile
+                </Link>
+                <button onClick={() => setShowLogoutModal(true)} className="navbar-logout-btn">
+                  Logout
+                </button>
+              </>
             )}
           </div>
         </ul>
@@ -83,9 +88,14 @@ function Navbar() {
               <Link to="/signup" className="navbar-signup-btn">Signup</Link>
             </>
           ) : (
-            <button onClick={() => setShowLogoutModal(true)} className="navbar-logout-btn">
-              Logout
-            </button>
+            <>
+              <button onClick={() => setShowLogoutModal(true)} className="navbar-logout-btn">
+                Logout
+              </button>
+              <Link to="/userprofile" className="navbar-profile-btn" title="Profile">
+                <FaUserCircle size={28} />
+              </Link>
+            </>
           )}
         </div>
       </nav>

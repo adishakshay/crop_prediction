@@ -8,6 +8,7 @@ import Marketplace from "./pages/Marketplace";
 import Weather from "./pages/Weather";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Userprofile from "./pages/Userprofile";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/userprofile" element={<Userprofile />} />
         <Route path="/form" element={<CropForm />} />
         <Route path="/recommendations" element={<Recommendations />} />
         <Route path="/history" element={<History />} />

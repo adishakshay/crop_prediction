@@ -1,0 +1,144 @@
+/* UserProfile Container */
+.userprofile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background: #f5f9f5;
+  min-height: 80vh;
+}
+
+/* Profile Card */
+.userprofile-card {
+  background: #ffffff;
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.userprofile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Avatar */
+.userprofile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #4caf50;
+  transition: transform 0.3s;
+}
+
+.userprofile-avatar:hover {
+  transform: scale(1.05);
+}
+
+/* Name */
+.userprofile-card h2 {
+  margin: 10px 0;
+  color: #2e7d32;
+  font-size: 24px;
+}
+
+/* Info Text */
+.userprofile-card p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 16px;
+}
+
+/* Language Selector */
+.userprofile-card select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Buttons */
+.userprofile-card button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  background: #4caf50;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.userprofile-card button:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+/* Phone / OTP Inputs */
+.userprofile-card .userprofile-input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0 5px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.userprofile-card .userprofile-input:focus {
+  border-color: #43a047;
+  box-shadow: 0 0 6px rgba(67, 160, 71, 0.5);
+}
+
+/* Submit Buttons for OTP / New Phone */
+.userprofile-card .userprofile-btn {
+  width: 60%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #4caf50;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.userprofile-card .userprofile-btn:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .userprofile-card {
+    padding: 25px 15px;
+  }
+
+  .userprofile-card h2 {
+    font-size: 20px;
+  }
+
+  .userprofile-card p {
+    font-size: 14px;
+  }
+
+  .userprofile-card button,
+  .userprofile-card .userprofile-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .userprofile-card .userprofile-input {
+    font-size: 13px;
+  }
+}

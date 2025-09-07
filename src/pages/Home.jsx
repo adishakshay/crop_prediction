@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import "./../styles/Home.css";
 
+import HeroImage from "./../assets/Gemini_Generated_Image_kuyxrkuyxrkuyxrk.png";
+
+
 function Home() {
   return (
     <>
@@ -49,7 +52,7 @@ function Home() {
           transition={{ duration: 1, delay: 0.6 }}
         >
           <motion.img
-            src="https://img.freepik.com/free-photo/field-corn-with-rows-plants_181624-26846.jpg"
+            src={HeroImage}
             alt="Smart Farming"
             className="home-hero-img"
             whileHover={{ scale: 1.05 }}

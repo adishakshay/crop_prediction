@@ -70,6 +70,7 @@
 .navbar-actions {
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
 .navbar-actions-mobile {
@@ -113,6 +114,25 @@
   background: #dc2626;
 }
 
+/* Profile button (icon only on desktop) */
+.navbar-profile-btn {
+  color: white;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.navbar-profile-btn:hover {
+  color: #ffd700;
+}
+
+.navbar-profile-btn svg {
+  vertical-align: middle;
+}
+
 /* ===== Responsive Styles ===== */
 @media (max-width: 768px) {
   .navbar-links {
@@ -137,6 +157,12 @@
 
   .navbar-toggle {
     display: block; /* show hamburger */
+  }
+
+  /* Profile button on mobile with text */
+  .navbar-profile-btn {
+    justify-content: center;
+    font-size: 1rem;
   }
 }
 

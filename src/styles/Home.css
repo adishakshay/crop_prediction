@@ -1,0 +1,137 @@
+/* Hero section layout */
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 40px;
+  flex-wrap: wrap;
+  background: var(--light-bg, #f5f9f5);
+}
+
+.home-hero {
+  max-width: 500px;
+}
+
+.home-hero-media {
+  flex: 1;
+  text-align: center;
+}
+
+.home-hero-img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Title and subtitle */
+.home-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: var(--primary, #2e7d32);
+  margin-bottom: 15px;
+}
+
+.home-subtitle {
+  font-size: 1.2rem;
+  color: #444;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+/* CTA Button */
+.home-cta-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover Effect */
+.home-cta-btn:hover {
+  background: linear-gradient(135deg, #43a047, #2e7d32);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 15px rgba(46, 125, 50, 0.4);
+}
+
+/* Ripple animation effect */
+.home-cta-btn::after {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 300%;
+  top: -100%;
+  left: -10%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(25deg);
+  transition: 0.6s;
+}
+
+.home-cta-btn:hover::after {
+  top: 100%;
+}
+
+/* Features section */
+.home-features {
+  padding: 60px 20px;
+  background: white;
+  text-align: center;
+}
+
+.home-section-title {
+  font-size: 2rem;
+  color: var(--primary, #2e7d32);
+  margin-bottom: 40px;
+}
+
+.home-feature-cards {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.home-feature-card {
+  background: #f9fff9;
+  padding: 20px;
+  border-radius: 12px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.home-feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.home-feature-card img {
+  width: 60px;
+  margin-bottom: 15px;
+}
+
+/* Video section */
+.home-video {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f0fff0;
+}
+
+.home-video-wrapper {
+  max-width: 700px;
+  margin: auto;
+}
+
+.home-video iframe {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}

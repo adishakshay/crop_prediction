@@ -1,0 +1,153 @@
+.recommendation-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2563eb;
+}
+
+.recommendation-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.recommendation-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.recommendation-form-group label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.recommendation-form-group input,
+.recommendation-form-group select {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.recommendation-form-group input:focus,
+.recommendation-form-group select:focus {
+  border-color: #2563eb;
+}
+
+.recommendation-checkbox-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.recommendation-submit-btn {
+  grid-column: span 2;
+  padding: 12px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.recommendation-submit-btn:hover {
+  background: #1e40af;
+}
+
+.recommendation-result {
+  margin-top: 30px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.recommendation-result-title {
+  color: #047857;
+}
+
+.recommendation-growth-stages ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.recommendation-investment-card {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+}
+
+/* ✅ Location Buttons */
+.recommendation-location-btn {
+  padding: 10px 15px;
+  background: #10b981; /* Green */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 5px;
+}
+
+.recommendation-location-btn:hover {
+  background: #059669; /* Darker green */
+}
+
+.recommendation-openmaps-btn {
+  padding: 8px 12px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 6px;
+}
+
+.recommendation-openmaps-btn:hover {
+  background: #1e40af;
+}
+
+.recommendation-edit-location-btn {
+  padding: 8px 12px;
+  background: #f59e0b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 6px;
+}
+
+.recommendation-edit-location-btn:hover {
+  background: #d97706;
+}
+
+/* ✅ Location status & accuracy */
+.recommendation-location-info {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.recommendation-location-accuracy {
+  font-weight: 600;
+  color: #065f46;
+  margin-top: 4px;
+}

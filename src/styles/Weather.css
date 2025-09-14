@@ -1,0 +1,100 @@
+.weather-container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  padding: 30px 20px;
+  background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+  text-align: center;
+}
+
+.weather-title {
+  font-size: 36px;
+  margin-bottom: 25px;
+  color: #1f3c55;
+}
+
+.weather-search {
+  margin-bottom: 25px;
+}
+
+.weather-select {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.weather-button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  background: #3498db;
+  color: white;
+  cursor: pointer;
+}
+
+.weather-button:hover {
+  background: #217dbb;
+}
+
+.weather-loading {
+  font-size: 16px;
+  color: #e74c3c;
+  margin-top: 10px;
+}
+
+.weather-card {
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 25px 35px;
+  border-radius: 15px;
+  display: inline-block;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.weather-city {
+  margin-bottom: 10px;
+  color: #1f3c55;
+}
+
+.weather-current-temp,
+.weather-wind,
+.weather-time {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.weather-forecast-title {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f3c55;
+}
+
+.weather-hourly {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.weather-hourly-item {
+  background: #ffffffaa;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100px;
+  text-align: center;
+}
+
+.weather-hour {
+  font-weight: 600;
+}
+
+.weather-hour-temp,
+.weather-hour-humidity,
+.weather-hour-wind {
+  font-size: 14px;
+}

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import CropForm from "./pages/CropForm";
 import Recommendations from "./pages/Recommendations";
@@ -11,6 +11,7 @@ import Signup from "./pages/Signup";
 import Userprofile from "./pages/Userprofile";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute"; // import it
 
 function App() {
   return (
@@ -21,12 +22,50 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/userprofile" element={<Userprofile />} />
-        <Route path="/cropform" element={<CropForm />} />
-        <Route path="/recommendations" element={<Recommendations />} />
-        <Route path="/history" element={<History />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/cropform"
+          element={
+            <ProtectedRoute>
+              <CropForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recommendations"
+          element={
+            <ProtectedRoute>
+              <Recommendations />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/history"
+          element={
+            <ProtectedRoute>
+              <History />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/marketplace"
+          element={
+            <ProtectedRoute>
+              <Marketplace />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/weather"
+          element={
+            <ProtectedRoute>
+              <Weather />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="/about" element={<About />} />
-        <Route path="/marketplace" element={<Marketplace />} />
-        <Route path="/weather" element={<Weather />} />
       </Routes>
       <Footer />
     </Router>

@@ -191,7 +191,7 @@ navLogoutYes: "Yes, Logout",
 navCancel: "Cancel",
 
 // About Page
-aboutTitle: "About NetPlough",
+  aboutTitle: "About NetPlough",
   aboutIntro: "Farming is the backbone of our nation ... better yields.",
   aboutStoryTitle: "Our Story",
   aboutStoryDesc: "NetPlough was born out of a simple idea: what if every farmer ... directly to the soil.",
@@ -224,7 +224,36 @@ aboutTitle: "About NetPlough",
   aboutCtaTitle: "Be Part of the NetPlough Movement",
   aboutCtaDesc: "Join us in transforming farming into a smarter ... agriculture.",
   aboutCtaBtn: "Get Started with NetPlough",
+
+   marketplaceTitle: "🌾 Farmer Marketplace",
+    sellYourProduct: "Sell Your Product",
+    updateProduct: "Update Product",
+    productName: "Product Name",
+    price: "Price",
+    quantity: "Quantity",
+    sellerName: "Your Name",
+    location: "Location",
+    uploadImage: "Upload product image:",
+    cropSave: "✂️ Crop & Save",
+    addProduct: "➕ Add Product",
+    updateProductBtn: "✅ Update Product",
+    edit: "✏️ Edit",
+    delete: "❌ Delete",
+
+    weatherTitle: "🌏 India Weather Report",
+    refreshBtn: "Refresh",
+    loadingWeather: "Loading weather data...",
+    temperature: "Temperature",
+    wind: "Wind",
+    time: "Time",
+    hourlyForecast: "Hourly Forecast (Next 24h)",
+    past10Days: "Past 10 Days Hourly",
   },
+
+
+
+
+
 
   hi: {
     homeTitle: "🌾 NetPlough में आपका स्वागत है",
@@ -486,7 +515,37 @@ aboutCTAButton: "NetPlough से शुरुआत करें",
   aboutCtaTitle: "नेटप्लाउ आंदोलन का हिस्सा बनें",
   aboutCtaDesc: "हमारे साथ जुड़ें और कृषि को स्मार्ट और लाभकारी बनाएं।",
   aboutCtaBtn: "नेटप्लाउ से शुरू करें",
+
+  marketplaceTitle: "🌾 किसान मार्केटप्लेस",
+    sellYourProduct: "अपनी फसल बेचें",
+    updateProduct: "उत्पाद अपडेट करें",
+    productName: "उत्पाद का नाम",
+    price: "कीमत",
+    quantity: "मात्रा",
+    sellerName: "आपका नाम",
+    location: "स्थान",
+    uploadImage: "उत्पाद की छवि अपलोड करें:",
+    cropSave: "✂️ क्रॉप और सहेजें",
+    addProduct: "➕ उत्पाद जोड़ें",
+    updateProductBtn: "✅ उत्पाद अपडेट करें",
+    edit: "✏️ संपादित करें",
+    delete: "❌ हटाएं",
+
+    weatherTitle: "🌏 भारत मौसम रिपोर्ट",
+    refreshBtn: "ताज़ा करें",
+    loadingWeather: "मौसम डेटा लोड हो रहा है...",
+    temperature: "तापमान",
+    wind: "हवा",
+    time: "समय",
+    hourlyForecast: "घंटा दर घंटा पूर्वानुमान (अगले 24 घंटे)",
+    past10Days: "पिछले 10 दिनों की घंटा दर घंटा",
   },
+
+
+
+
+
+
 
    sd: {
     homeTitle: "🌾 NetPlough सिदा स्वागत",
@@ -750,5 +809,29 @@ aboutTitle: "नेटप्लौ विषये",
   aboutCtaTitle: "नेटप्लौ आन्दोलनस्य भागः भव",
   aboutCtaDesc: "स्मार्टलाभकारीकृषिं निर्मातुमस्माकं सह भव।",
   aboutCtaBtn: "नेटप्लौ सह आरभस्व",
+
+   marketplaceTitle: "🌾 कृषक बाज़ार",
+    sellYourProduct: "अपनी फसल विक्रय करें",
+    updateProduct: "उत्पाद अद्यतन करें",
+    productName: "उत्पाद नाम",
+    price: "मूल्य",
+    quantity: "मात्रा",
+    sellerName: "नाम",
+    location: "स्थान",
+    uploadImage: "उत्पाद छवि अपलोड करें:",
+    cropSave: "✂️ क्रॉप एवं सहेजें",
+    addProduct: "➕ उत्पाद जोड़ें",
+    updateProductBtn: "✅ उत्पाद अद्यतन करें",
+    edit: "✏️ संपादित करें",
+    delete: "❌ हटाएँ",
+
+    weatherTitle: "🌏 भारत मौसम रिपोर्ट",
+    refreshBtn: "ताज़ा करें",
+    loadingWeather: "मौसम डेटा लोड हो रहा है...",
+    temperature: "तापमान",
+    wind: "हवा",
+    time: "समय",
+    hourlyForecast: "घंटा दर घंटा पूर्वानुमान (अगले 24 घंटे)",
+    past10Days: "पिछले 10 दिनों की घंटा दर घंटा",
   },
 };

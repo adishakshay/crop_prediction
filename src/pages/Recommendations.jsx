@@ -183,11 +183,6 @@ const Recommendations = () => {
   // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.landAcres < 0) {
-      alert(t.landAcresValidation);
-      return;
-    }
-
     setLoading(true);
     try {
       const res = await fetch("http://127.0.0.1:5000/predict", {
